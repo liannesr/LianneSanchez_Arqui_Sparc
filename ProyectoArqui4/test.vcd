@@ -1,0 +1,52 @@
+$date
+	Tue May 22 13:08:23 2018
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module dpathTest $end
+$var wire 32 ! npc_out [31:0] $end
+$upscope $end
+$scope module dpathTest $end
+$var wire 32 " mar_out [31:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 "
+b0 !
+$end
+#30
+b100 "
+#50
+b100 !
+#210
+b101100 "
+#290
+b1000 "
+#310
+b1000 !
+#370
+b0 "
+#450
+b1000 "
+#530
+b101110 "
+#570
+b1100 "
+#590
+b1100 !
+#650
+b11000110000010000110000011001000 "
+#690
+b1100 "
+#790
+b10000 "
+#810
+b10000 !
+#990
+b10100 "
+#1004
