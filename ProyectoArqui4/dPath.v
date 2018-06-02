@@ -75,7 +75,7 @@ module DataPath(input clk, finish, memprecharge );
   
     fr fr(fr_out, flag_out, frld_out, clk);
     conditionChecker cc(cc_out, a_out, ir_out[29:25], N_flag, Z_flag, V_flag, C_flag);
-    dataType dataType(dataType_out, sign_out, ir_out[24:19]);
+    dataType dataType(dataType_out, sign_out, ir_out[24:19],cu.mux4to1_5_output);
     signExtender signex(signExt_out, ir_out[12:0]);
     mux2To1_31 muxA(muxA_out, data_out, alu_out, muxa_out);
     mux2To1_31 muxE(muxE_out, alu_out, npc_out, muxe_out);
