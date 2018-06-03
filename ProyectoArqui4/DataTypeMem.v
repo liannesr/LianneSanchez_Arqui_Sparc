@@ -10,7 +10,7 @@ module dataType(output reg [1:0] size, output reg sign, input [5:0] op3, input [
 		begin
 			if(state==1 || state==2 || state==3 || state==4)
 			begin
-				$display("IM HERE BEOTCH");
+			
 				sign<=0;
 				size<=2'b10;
 			end 

@@ -10,7 +10,7 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 	always @(Op3, Ain, Bin, Cin)						//Do when any of the inputs change 
 		begin
 			case(Op3) 
-				6'b111010: begin Out = Bin + 4;  end// 6'b000010:
+				6'b111010: begin Out <= Bin + 4;  $display("LOL IM IN");end// 6'b000010:
 				6'b000000: Out <= Ain + Bin; 			//ADD -- Adds 2 32-bit inputs
 				6'b010000: begin
 							{C,Out} = Ain + Bin; 		//ADDcc -- Adds 2 32-bit inputs modifying icc

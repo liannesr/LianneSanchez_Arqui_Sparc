@@ -118,11 +118,12 @@ module DataPath(input clk, finish, memprecharge );
     end
 
     //always @(posedge clk) begin
-    always @(*)begin 
-        $monitor("State:%d \t MAR_en:%b MAR_out:%d \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", cu.mux4to1_5_output, marld_out, mar_out,data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
+    always @(cu.mux4to1_5_output)begin 
+        //$monitor("State:%d \t MAR_en:%b MAR_out:%d \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", cu.mux4to1_5_output, marld_out, mar_out,data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
         //$monitor("MAR_en:%b \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", marld_out, data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
         //$display("Memory out: %b", data_out);
-        //$display("PC:%d MAR:%d NPC:%d alu_out:%b", pc_out, mar_out, npc_out, alu_out);
+        $display("state:%d PC:%d MAR:%d NPC:%d alu_out %d",  cu.mux4to1_5_output,pc_out, mar_out, npc_out, alu_out);
+
           // $monitor("MAR: %d IR_Out: %b , %b Data_out: %b",  mar_out, ir_out, irld_out, data_out);
           // $display("IR OUT: %b", ir_out);
            //$display("PC: %d", pc_out);
