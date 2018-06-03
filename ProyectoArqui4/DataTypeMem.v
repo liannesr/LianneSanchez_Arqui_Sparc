@@ -8,9 +8,14 @@ module dataType(output reg [1:0] size, output reg sign, input [5:0] op3, input [
 
 	always @(*)
 		begin
-			
-			sign<=0;
-			size<=2'b10;
+			if(state==1 || state==2 || state==3 || state==4)
+			begin
+				$display("IM HERE BEOTCH");
+				sign<=0;
+				size<=2'b10;
+			end 
+			else
+			begin
 			case(op3)
 				6'b001001:						// LOAD SIGNED BYTE
 					begin
@@ -53,6 +58,7 @@ module dataType(output reg [1:0] size, output reg sign, input [5:0] op3, input [
 						size <= 2'b10;						
 					end 
 			endcase // op3
+		end
 	end
 endmodule // dataType
 
