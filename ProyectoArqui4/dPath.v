@@ -77,20 +77,21 @@ module DataPath(input clk, finish, memprecharge );
     conditionChecker cc(cc_out, a_out, ir_out[29:25], N_flag, Z_flag, V_flag, C_flag);
     dataType dataType(dataType_out, sign_out, ir_out[24:19],cu.mux4to1_5_output);
     signExtender signex(signExt_out, ir_out[21:0], cu.mux4to1_5_output);
+        mar mar(mar_out, muxH_out, marld_out, clk);
+    mdr mdr(mdr_out, muxA_out, mdrld_out, clk);
     mux2To1_31 muxA(muxA_out, data_out, alu_out, muxa_out);
     mux2To1_31 muxE(muxE_out, alu_out, npc_out, muxe_out);
     mux2To1_31 muxF(muxF_out, AR_out, ir_out, muxf_out);
     mux2To1_6 muxC(muxC_out, op_out, ir_out[24:19], muxc_out);
     mux2To1_5 muxG(muxG_out, ir_out[29:25], 5'b01111, muxg_out);
-    mux4To1_31 muxB(muxB_out, BR_out, signExt_out, mdr_out, muxD_out, selectB);
+    mux4To1_31 muxB(muxB_out, BR_out, signExt_out, data_out, muxD_out, selectB);
     mux4To1_31 muxD(muxD_out, pc_out, npc_out, 32'd0, 32'd0, selectD);//change
     mux2To1_31 muxH(muxH_out, alu_out, pc_out, muxh_out);
     mux2To1_31 muxI(muxI_out, data_out, alu_out, muxi_out);
     ALU alu(alu_out, N_flag, Z_flag,V_flag,C_flag, muxF_out, muxB_out, muxC_out, cin_out);
     npc npc(npc_out, alu_out, npcld_out, clk);
     ram ram(data_out, moc_out, rw_out, mov_out, sign_out,1'b1, dataType_out, mdr_out, mar_out, memprecharge);
-    mar mar(mar_out, muxH_out, marld_out, clk);
-    mdr mdr(mdr_out, muxA_out, mdrld_out, clk);
+
     registerFile rf(AR_out, BR_out, muxG_out, alu_out, ir_out[18:14], ir_out[4:0], rfld_out, clk);
     controlUnit cu(present_state, mov_out, rw_out, marld_out, mdrld_out, irld_out, pcld_out, npcld_out, rfld_out,frld_out, cin_out,
         muxa_out, muxb0_out, muxb1_out, muxc_out, muxd0_out, muxd1_out, muxe_out, muxf_out, muxg_out, muxh_out,muxi_out, op5_out,
@@ -123,8 +124,9 @@ module DataPath(input clk, finish, memprecharge );
         //$monitor("MAR_en:%b \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", marld_out, data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
         //$display("Memory out: %b", data_out);
         $display("state:%d PC:%d MAR:%d NPC:%d alu_out %d",  cu.mux4to1_5_output,pc_out, mar_out, npc_out, alu_out);
-       // $display("stat: %d data_out:%b, mdr: %b", cu.mux4to1_5_output, data_out,mdr_out);
+     //  $display("stat: %d data_out:%b, mdr_out: %b. mux A:%b", cu.mux4to1_5_output, data_out,mdr_out, muxA_out);
             //$monitor("MAR: %d IR_Out: %b , %b Data_out: %b",  mar_out, ir_out, irld_out, data_out);
+
             //$display("IR OUT: %b", ir_out);
             //$display("PC: %d", pc_out);
             //$display("NPC: %d", npc_out);

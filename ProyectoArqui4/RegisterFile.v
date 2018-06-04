@@ -98,6 +98,8 @@ endmodule
 
 module registerFile(output wire[31:0]PA,output wire[31:0]PB,input [4:0]InDecoder,input [31:0]InRegister,
 	input [4:0] MuxA,input [4:0] MuxB, input RFLd, input clk);
+	
+	
 	wire [31:0] DecOut;
 	wire [31:0] PortA;
 	wire [31:0] PortB;
@@ -176,9 +178,11 @@ module registerFile(output wire[31:0]PA,output wire[31:0]PB,input [4:0]InDecoder
 	mux32To1 muxB(PB,MuxB,R0Out,R1Out,R2Out,R3Out,R4Out,R5Out,R6Out,R7Out,R8Out,R9Out,R10Out,R11Out,R12Out,R13Out,R14Out,R15Out,R16Out,
 					R17Out,R18Out,R19Out,R20Out,R21Out,R22Out,R23Out,R24Out,R25Out,R26Out,R27Out,R28Out,R29Out,R30Out,R31Out);
 
-	always @(posedge R1Out, R2Out) begin
+	always @(R1Out, R2Out, R3Out) begin
 		$display("R1_out %b", R1Out);
 		$display("R2_out %b", R2Out);
+		$display("R3_out %b", R3Out);
+		$display("R5_out %b", R5Out);
 		$display("In Register %b",InRegister);
 		//display("R5_out %b", R5Out);
 	end // always @(posedge clk)

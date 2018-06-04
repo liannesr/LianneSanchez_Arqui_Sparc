@@ -9,7 +9,7 @@ module mar(output reg [31:0] outToRAMAddress, input [31:0] Ds, input MARld, inpu
 	end
 	always @(posedge clk) 
 		begin
-			#5;
+			// #5;
 			if (MARld == 1)
 				outToRAMAddress = Ds;
 		end

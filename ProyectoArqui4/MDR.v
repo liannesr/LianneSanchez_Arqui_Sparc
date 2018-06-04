@@ -5,12 +5,12 @@
 */
 module mdr(output reg [31:0] outToRAMIn, input [31:0] Ds, input MDRld, input clk);
 	initial begin
-	 	outToRAMIn = 32'b00000000000000000000000000000000;
+	 	//outToRAMIn = 32'b00000000000000000000000000000000;
 	end
 	always @(posedge clk) 
 		begin
 			if (MDRld == 1)
-				outToRAMIn <= Ds;
+				outToRAMIn = Ds;
 		end
 endmodule
 

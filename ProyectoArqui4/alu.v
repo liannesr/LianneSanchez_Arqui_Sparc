@@ -9,7 +9,9 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 	end
 	always @(Op3, Ain, Bin, Cin)						//Do when any of the inputs change 
 		begin
+
 			case(Op3) 
+
 				6'b111111: begin
 				 // 	$display("Bin, %b", Bin);
 								
@@ -36,8 +38,10 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 				6'b000100: Out = Ain - Bin; 			//SUB -- Substracts 2 32-bit input
 				6'b010100: begin
 							{C,Out} <= Ain - Bin; 		//SUBcc -- Substracts 2 32-bit input, icc
+							Out <= Ain - Bin;
 							flagCheckSub();				//Calling to check flags for substraction
-							//$display("Bin %b, Ain %b, Out%b", Bin, Ain,Out);
+							// $display("Bin %b, Ain %b, Out%b", Bin, Ain,Out);
+							// $display("N %b, Z %b, V %b, C %b", N,Z,V,C);
 
 							end
 				6'b001100: Out = Ain - Bin - Cin; 		//SUBX -- Substracts 2 32-bit input and carry in
@@ -83,7 +87,7 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 				6'b110011: begin Out <= Bin; end // 6'b110011:
 				//6'b100101:
 				//6'b111000:
-				6'b001010: begin Out <= Bin; end
+				6'b001010: begin Out <= Bin;end
 
 				//6'b111110:
 				//6'b111100:
@@ -108,7 +112,7 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 
 	task flagCheckSub;
 		begin
-			if (Out==0) //Checking for zero flag 
+			if ((Ain-Bin)==0) //Checking for zero flag 
 				Z=1;
 			else Z=0;
 
