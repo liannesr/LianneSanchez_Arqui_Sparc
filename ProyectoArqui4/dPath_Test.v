@@ -6,7 +6,7 @@ module dpathTest;
 
 	DataPath dPath(clk,precharge,finish);
 
-	initial #1500 begin
+	initial #2000 begin
 		finish = 1;
 		#2 finish = 0;
 		#2 $finish;

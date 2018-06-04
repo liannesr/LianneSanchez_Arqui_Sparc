@@ -10,7 +10,19 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 	always @(Op3, Ain, Bin, Cin)						//Do when any of the inputs change 
 		begin
 			case(Op3) 
-				6'b111010: begin Out <= Bin + 4;  $display("LOL IM IN");end// 6'b000010:
+				6'b111111: begin
+				 // 	$display("Bin, %b", Bin);
+								
+					// $display("PC %b", dPath.pc_out-4);
+					 //$display("Multiplication %b", $signed(Bin)*4);
+					Out[31:0]<= $signed(dPath.pc_out-3'b100)-($signed(Bin))*$signed(3'b100);
+					//$display("N %b, Z %b, V %b, C %b", N,Z,V,C);
+					//Out[31:0]<= $signed(dPath.pc_out-3'sb100)-($signed(Bin)*3'sb100);
+					//$display("out %d", Out);
+					//$display("out %b", Out);
+
+				end // 6'b111111:
+				6'b111010: begin Out <= Bin + 4;  end// 6'b000010:
 				6'b000000: Out <= Ain + Bin; 			//ADD -- Adds 2 32-bit inputs
 				6'b010000: begin
 							{C,Out} = Ain + Bin; 		//ADDcc -- Adds 2 32-bit inputs modifying icc
@@ -23,8 +35,10 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 							end
 				6'b000100: Out = Ain - Bin; 			//SUB -- Substracts 2 32-bit input
 				6'b010100: begin
-							{C,Out} = Ain - Bin; 		//SUBcc -- Substracts 2 32-bit input, icc
+							{C,Out} <= Ain - Bin; 		//SUBcc -- Substracts 2 32-bit input, icc
 							flagCheckSub();				//Calling to check flags for substraction
+							//$display("Bin %b, Ain %b, Out%b", Bin, Ain,Out);
+
 							end
 				6'b001100: Out = Ain - Bin - Cin; 		//SUBX -- Substracts 2 32-bit input and carry in
 				6'b011100: begin
@@ -70,7 +84,7 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 				//6'b100101:
 				//6'b111000:
 				6'b001010: begin Out <= Bin; end
-				//6'b111111:
+
 				//6'b111110:
 				//6'b111100:
 			endcase // Op3

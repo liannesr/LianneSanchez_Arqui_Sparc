@@ -4,20 +4,38 @@
    Professor: Nestor Rodríguez 
 */
 
-module signExtender(output reg [31:0] signExtended, input [12:0] notSignExtended);
+module signExtender(output reg [31:0] signExtended, input [21:0] notSignExtended, input [4:0] state);
 	always @(notSignExtended) 
 		begin
-			signExtended[12:0] <= notSignExtended[12:0];
-			case(notSignExtended[12])
-				1'b0:	
-					begin
-						signExtended[31:13] <= 19'b0000000000000000000;
-					end
-				1'b1:
-					begin
-						signExtended[31:13] <= 19'b1111111111111111111;
-					end
-			endcase // notSignExtended[12]
+			if(state==25)
+				begin
+				signExtended[21:0] <= notSignExtended[21:0];
+				
+					case(notSignExtended[21])
+						1'b0:	
+							begin
+								signExtended[31:22] <= 10'b0000000000;
+							end
+						1'b1:
+							begin
+								signExtended[31:22] <= 10'b1111111111;
+							end
+					endcase // notSignExtended[12]					
+				end
+			else
+				begin
+					signExtended[12:0] <= notSignExtended[12:0];
+					case(notSignExtended[12])
+						1'b0:	
+							begin
+								signExtended[31:13] <= 19'b0000000000000000000;
+							end
+						1'b1:
+							begin
+								signExtended[31:13] <= 19'b1111111111111111111;
+							end
+					endcase // notSignExtended[12]
+				end
 		end
 endmodule
 
