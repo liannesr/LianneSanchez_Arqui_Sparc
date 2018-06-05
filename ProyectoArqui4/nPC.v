@@ -11,6 +11,7 @@ module npc(output reg [31:0] outnPC, input [31:0] inFromDataPath, input nPCld, i
 		begin	
 			//$display("npcInside",outnPC);
 			if (nPCld == 1)
+				//if(inFromDataPath==52) outnPC <=pc.outPC;
 				outnPC <= inFromDataPath;
 		end
 endmodule

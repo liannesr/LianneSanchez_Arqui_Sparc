@@ -4,7 +4,7 @@
    Professor: Nestor Rodríguez 
 */
 
-module controlUnit (output wire [4:0] present_state, output wire MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG, MH,MI, OP5, 
+module controlUnit (output wire [4:0] present_state, output wire MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG, MH,MI,ML, OP5, 
 				OP4, OP3, OP2, OP1, OP0, input MOC, clr, Condin,cond, clk, N_flag, Z_flag, C_flag, V_flag, input [31:0] instr);
 
 
@@ -29,7 +29,7 @@ reg [4:0] CR;
 //Other Variables included on CU - Parameters
 wire [1:0] MAOutM, MBOutM, MCOutM;
 wire MOV_out, RW_out, MARld_out, MDRld_out, IRld_out, PCld_out, nPCld_out, RFld_out, FRld_out, Cin_out, MA_out, MB0_out, MB1_out, MC_out, MD0_out, MD1_out,
-	ME_out, MF_out, MG_out, MH_out, MI_out, OP5_out, OP4_out, OP3_out, OP2_out, OP1_out, OP0_out, N2_out, N1_out, N0_out, Inv_out, S1_out, S0_out, CR4_out,
+	ME_out, MF_out, MG_out, MH_out, MI_out,ML_out, OP5_out, OP4_out, OP3_out, OP2_out, OP1_out, OP0_out, N2_out, N1_out, N0_out, Inv_out, S1_out, S0_out, CR4_out,
 	CR3_out, CR2_out, CR1_out, CR0_out;  
 
 
@@ -44,11 +44,11 @@ mux4To1_5 mux4To1_5(mux4to1_5_output, encoder_output, option1,CR, incrementRegis
 adder adder(adder_output, mux4to1_5_output);
 incrementerRegister incrementerRegister(incrementRegister_output, adder_output, clk);	// Connected
 microstore microstore(MOV_out, RW_out, MARld_out, MDRld_out, IRld_out, PCld_out, nPCld_out, RFld_out, FRld_out, Cin_out, MA_out, MB0_out, MB1_out, MC_out, MD0_out, MD1_out,
-	ME_out, MF_out, MG_out,MH_out, MI_out, OP5_out, OP4_out, OP3_out, OP2_out, OP1_out, OP0_out, N2_out, N1_out, N0_out, Inv_out, S1_out, S0_out, CR4_out,
+	ME_out, MF_out, MG_out,MH_out, MI_out, ML_out,OP5_out, OP4_out, OP3_out, OP2_out, OP1_out, OP0_out, N2_out, N1_out, N0_out, Inv_out, S1_out, S0_out, CR4_out,
 	CR3_out, CR2_out, CR1_out, CR0_out, mux4to1_5_output, clk, 1'b0);	// Connected
-controlRegister controlRegister(MOV, state_out,  RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG,MH,MI,OP5, 
+controlRegister controlRegister(MOV, state_out,  RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG,MH,MI, ML,OP5, 
 				OP4, OP3, OP2, OP1, OP0, N2, N1, N0, Inv, S1, S0, CR4, CR3, CR2, CR1, CR0, MOV_out, RW_out, MARld_out, MDRld_out, 
-				IRld_out, PCld_out, nPCld_out, RFld_out, FRld_out, Cin_out, MA_out, MB0_out, MB1_out, MC_out, MD0_out, MD1_out, ME_out, MF_out, MG_out, MH_out, MI_out,
+				IRld_out, PCld_out, nPCld_out, RFld_out, FRld_out, Cin_out, MA_out, MB0_out, MB1_out, MC_out, MD0_out, MD1_out, ME_out, MF_out, MG_out, MH_out, MI_out, ML_out,
 				OP5_out, OP4_out, OP3_out, OP2_out, OP1_out, OP0_out, N2_out, N1_out, N0_out, Inv_out, S1_out, S0_out, CR4_out,
 				CR3_out, CR2_out, CR1_out, CR0_out,mux4to1_5_output, clk); 
 

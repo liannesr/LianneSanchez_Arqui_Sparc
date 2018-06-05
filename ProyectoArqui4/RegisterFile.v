@@ -179,11 +179,11 @@ module registerFile(output wire[31:0]PA,output wire[31:0]PB,input [4:0]InDecoder
 					R17Out,R18Out,R19Out,R20Out,R21Out,R22Out,R23Out,R24Out,R25Out,R26Out,R27Out,R28Out,R29Out,R30Out,R31Out);
 
 	always @(R1Out, R2Out, R3Out) begin
-		$display("R1_out %b", R1Out);
-		$display("R2_out %b", R2Out);
-		$display("R3_out %b", R3Out);
-		$display("R5_out %b", R5Out);
-		$display("In Register %b",InRegister);
+		// $display("R1_out %b", R1Out);
+		// $display("R2_out %b", R2Out);
+		// $display("R3_out %b", R3Out);
+		// $display("R5_out %b", R5Out);
+		// $display("In Register %b",InRegister);
 		//display("R5_out %b", R5Out);
 	end // always @(posedge clk)
 endmodule

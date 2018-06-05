@@ -15,8 +15,8 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 				6'b111111: begin
 				 // 	$display("Bin, %b", Bin);
 								
-					// $display("PC %b", dPath.pc_out-4);
-					 //$display("Multiplication %b", $signed(Bin)*4);
+					 $display("PC %b", dPath.pc_out-4);
+					 $display("Multiplication %b", $signed(Bin)*4);
 					Out[31:0]<= $signed(dPath.pc_out-3'b100)-($signed(Bin))*$signed(3'b100);
 					//$display("N %b, Z %b, V %b, C %b", N,Z,V,C);
 					//Out[31:0]<= $signed(dPath.pc_out-3'sb100)-($signed(Bin)*3'sb100);
@@ -24,7 +24,9 @@ module ALU (output reg [31:0]  Out, output reg N,Z,V,C, input [31:0] Ain, Bin, i
 					//$display("out %b", Out);
 
 				end // 6'b111111:
-				6'b111010: begin Out <= Bin + 4;  end// 6'b000010:
+				6'b111010: begin Out <= Bin + 4; 
+							//$display("Bin %d, Ain %d, Out%d", Bin, Ain,Out);
+							 end// 6'b000010:
 				6'b000000: Out <= Ain + Bin; 			//ADD -- Adds 2 32-bit inputs
 				6'b010000: begin
 							{C,Out} = Ain + Bin; 		//ADDcc -- Adds 2 32-bit inputs modifying icc

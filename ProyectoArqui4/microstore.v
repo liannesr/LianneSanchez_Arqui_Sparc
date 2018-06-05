@@ -3,7 +3,7 @@
    Phase 3 
    Professor: Nestor Rodríguez 
 */
-module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG, MH, MI, OP5, 
+module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, Cin, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG, MH, MI,ML, OP5, 
 				OP4, OP3, OP2, OP1, OP0, N2, N1, N0, Inv, S1, S0, CR4, CR3, CR2, CR1, CR0, input [4:0] state, input clk, clr);
 	initial
 		begin
@@ -95,6 +95,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 			//#5;
 			MH <= 0;
 			MI <= 0;
+			ML <=0;
 			case(state)
 				5'b00000:
 					begin
@@ -153,7 +154,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						MB0 <= 1;
 						MB1 <= 1;
 						MC <= 0;
-						MD0 <= 1;
+						MD0 <= 1;//--
 						MD1 <= 0;
 						ME <= 1;
 						MF <= 0;
@@ -196,7 +197,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						MB0 <= 1;
 						MB1 <= 1;
 						MC <= 0;
-						MD0 <= 1;// cambie eso a 0
+						MD0 <= 1;// cambie eso a 0--------
 						MD1 <= 0;
 						ME <= 1;
 						MF <= 0;
@@ -237,7 +238,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						MB0 <= 1;
 						MB1 <= 1;
 						MC <= 0;
-						MD0 <= 1;
+						MD0 <= 1; //----------
 						MD1 <= 0;
 						ME <= 1;
 						MF <= 0;
@@ -280,7 +281,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						MB0 <= 1;
 						MB1 <= 1;
 						MC <= 0;
-						MD0 <= 1;
+						MD0 <= 1;//----------------
 						MD1 <= 0;
 						ME <= 0;
 						MF <= 0;
@@ -967,7 +968,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 												//	Control Signals for Data Path
 						MOV <= 0;
 						RW <= 0;
-						MARld <= 1;
+						MARld <= 0;
 						MDRld <= 0;
 						IRld <= 0;
 						PCld <= 0;
@@ -983,10 +984,11 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						ME <= 0;
 						MF <= 0;
 						MG <= 0;
+						ML<=1;
 						OP0 <= 0;
-						OP1 <= 0;
+						OP1 <= 1;
 						OP2 <= 0;
-						OP3 <= 0;
+						OP3 <= 1;
 						OP4 <= 0;
 						OP5 <= 0;
 						Cin <= 0;
@@ -1024,10 +1026,11 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						ME <= 0;
 						MF <= 0;
 						MG <= 0;
+						ML <= 1;
 						OP0 <= 0;
-						OP1 <= 0;
+						OP1 <= 1;
 						OP2 <= 0;
-						OP3 <= 0;
+						OP3 <= 1;
 						OP4 <= 0;
 						OP5 <= 0;
 						Cin <= 0;
@@ -1038,19 +1041,19 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						Inv <= 0;
 						S1 <= 0;
 						S0 <= 0;
-						CR4 <= 0;
+						CR4 <= 1;
 						CR3 <= 0;
-						CR2 <= 0;
+						CR2 <= 1;
 						CR1 <= 0;
-						CR0 <= 0;
+						CR0 <= 1;
 					end
 				5'b10111:
 					begin
 												//	Control Signals for Data Path
-						MOV <= 0;
+						MOV <= 1;
 						RW <= 0;
 						MARld <= 0;
-						MDRld <= 0;
+						MDRld <= 1;
 						IRld <= 0;
 						PCld <= 0;
 						nPCld <= 0;
@@ -1065,10 +1068,11 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						ME <= 0;
 						MF <= 0;
 						MG <= 0;
+						ML <= 1;
 						OP0 <= 0;
-						OP1 <= 0;
+						OP1 <= 1;
 						OP2 <= 0;
-						OP3 <= 0;
+						OP3 <= 1;
 						OP4 <= 0;
 						OP5 <= 0;
 						Cin <= 0;

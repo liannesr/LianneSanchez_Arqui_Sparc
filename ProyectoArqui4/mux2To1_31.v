@@ -5,9 +5,7 @@
 */
 module mux2To1_31(output reg [31:0] outMux, input [31:0] I_0, input [31:0] I_1, 
 	input select);
-	initial begin
-		//outMux = 0;
-	end
+
 	always @(I_0, I_1, select)
 		begin
 			case(select)

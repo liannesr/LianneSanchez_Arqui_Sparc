@@ -3,7 +3,7 @@
    Phase 4 
    Professor: Nestor Rodríguez 
 */
-module DataPath(input clk, finish, memprecharge );
+module DataPath(input clk, finish);
     
     reg clr;
     //CONTROL UNIT
@@ -68,6 +68,9 @@ module DataPath(input clk, finish, memprecharge );
     muxb1_out, muxb0_out, muxa_out, rfld_out, npcld_out, pcld_out, irld_out, marld_out, mdrld_out,
     rw_out, mov_out, enable_out, op5_out, op4_out, op3_out, op2_out, op1_out, op0_out;
 
+    wire muxl_out;
+    wire [4:0] muxL_out;
+
     //CONECTION OF MODULES
 
     ir ir(ir_out, data_out, irld_out, clk);
@@ -88,13 +91,17 @@ module DataPath(input clk, finish, memprecharge );
     mux4To1_31 muxD(muxD_out, pc_out, npc_out, 32'd0, 32'd0, selectD);//change
     mux2To1_31 muxH(muxH_out, alu_out, pc_out, muxh_out);
     mux2To1_31 muxI(muxI_out, data_out, alu_out, muxi_out);
+
+    //NEW
+    mux2To1_5 muxL(muxL_out, ir_out[4:0], ir_out[29:25], muxl_out);
+
     ALU alu(alu_out, N_flag, Z_flag,V_flag,C_flag, muxF_out, muxB_out, muxC_out, cin_out);
     npc npc(npc_out, alu_out, npcld_out, clk);
-    ram ram(data_out, moc_out, rw_out, mov_out, sign_out,1'b1, dataType_out, mdr_out, mar_out, memprecharge);
+    ram ram(data_out, moc_out, rw_out, mov_out, sign_out,1'b1, dataType_out, alu_out, mar_out, memprecharge);
 
-    registerFile rf(AR_out, BR_out, muxG_out, alu_out, ir_out[18:14], ir_out[4:0], rfld_out, clk);
+    registerFile rf(AR_out, BR_out, muxG_out, alu_out, ir_out[18:14], muxL_out, rfld_out, clk);
     controlUnit cu(present_state, mov_out, rw_out, marld_out, mdrld_out, irld_out, pcld_out, npcld_out, rfld_out,frld_out, cin_out,
-        muxa_out, muxb0_out, muxb1_out, muxc_out, muxd0_out, muxd1_out, muxe_out, muxf_out, muxg_out, muxh_out,muxi_out, op5_out,
+        muxa_out, muxb0_out, muxb1_out, muxc_out, muxd0_out, muxd1_out, muxe_out, muxf_out, muxg_out, muxh_out,muxi_out, muxl_out, op5_out,
         op4_out, op3_out, op2_out, op1_out, op0_out,moc_out, clr, 1'b1, cc_out, clk, frN_out, frZ_out, frC_out, frV_out, ir_out);
     
 
@@ -123,10 +130,11 @@ module DataPath(input clk, finish, memprecharge );
         //$monitor("State:%d \t MAR_en:%b MAR_out:%d \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", cu.mux4to1_5_output, marld_out, mar_out,data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
         //$monitor("MAR_en:%b \t Memory_data_out:%b \t IR_en:%b \t IR_Out:%b \t MOV:%b \t MOC:%b \t R/W:%b\n", marld_out, data_out, irld_out,ir_out, mov_out,moc_out, rw_out);
         //$display("Memory out: %b", data_out);
-        $display("state:%d PC:%d MAR:%d NPC:%d alu_out %d",  cu.mux4to1_5_output,pc_out, mar_out, npc_out, alu_out);
-     //  $display("stat: %d data_out:%b, mdr_out: %b. mux A:%b", cu.mux4to1_5_output, data_out,mdr_out, muxA_out);
+        $display("state:%d \tPC:%d \tMAR:%d \tNPC:%d \talu_out %d",  cu.mux4to1_5_output,pc_out, mar_out, npc_out, alu_out);
+        $display("MDR_out: %d MDR ld: %b",mdr_out, mdrld_out);
+      // $display("stat: %d data_out:%b, mdr_out: %b. mux A:%b", cu.mux4to1_5_output, data_out,mdr_out, muxA_out);
             //$monitor("MAR: %d IR_Out: %b , %b Data_out: %b",  mar_out, ir_out, irld_out, data_out);
-
+            //$monitor("State: %d , MAR: %d, Time: %d", cu.mux4to1_5_output,mar_out, $time);
             //$display("IR OUT: %b", ir_out);
             //$display("PC: %d", pc_out);
             //$display("NPC: %d", npc_out);

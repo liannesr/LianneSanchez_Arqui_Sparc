@@ -73,7 +73,7 @@ module ram(output reg [31:0] dataOut, output reg MOC, input RW, MOV, sign, enabl
 			while(!$feof(textFile)) begin
 				codeFile= $fscanf(textFile, "%b", data);
 				Mem[Start_address] = data;
-//				$display("Mem[%d] %d",Start_address, data);
+				$display("Mem[%d] %d",Start_address, data);
 				Start_address = Start_address + 1;
 			end 
 			$fclose(textFile);
@@ -133,10 +133,10 @@ module ram(output reg [31:0] dataOut, output reg MOC, input RW, MOV, sign, enabl
 											2'b01: {Mem[in_address],Mem[in_address+1]} <= dataIn[15:0];
 											2'b10: {Mem[in_address],Mem[in_address+1],Mem[in_address+2],Mem[in_address+3]} <= dataIn;
 										endcase // dataType
-										$display("Mem[%d] %d",in_address, Mem[in_address]);
-										$display("Mem[%d] %d",in_address+1, Mem[in_address+1]);
-										$display("Mem[%d] %d",in_address+2, Mem[in_address+2]);
-										$display("Mem[%d] %d",in_address+3, Mem[in_address+3]);
+										$display("Mem[%d] %d",in_address, dataIn[7:0]);
+										//$display("Mem[%d] %d",in_address+1, Mem[in_address+1]);
+										//$display("Mem[%d] %d",in_address+2, Mem[in_address+2]);
+										//$display("Mem[%d] %d",in_address+3, Mem[in_address+3]);
 										//MOC <= 1;
 									end
 
