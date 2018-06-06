@@ -9,7 +9,7 @@ module incrementerRegister(output reg [4:0] outToMux, input [4:0] inAdder, input
 	 	outToMux = 5'b00000;
 	end
 
- 	always @(posedge clk) 
+ 	always @(posedge clk)//posedge clk) 
  		begin
  			#10;
  			outToMux <= inAdder;

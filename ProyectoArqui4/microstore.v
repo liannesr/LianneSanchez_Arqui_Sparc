@@ -1008,10 +1008,10 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 				5'b10110:
 					begin
 												//	Control Signals for Data Path
-						MOV <= 0;
+						MOV <= 1;
 						RW <= 0;
 						MARld <= 0;
-						MDRld <= 0;
+						MDRld <= 1;
 						IRld <= 0;
 						PCld <= 0;
 						nPCld <= 0;
@@ -1041,11 +1041,11 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						Inv <= 0;
 						S1 <= 0;
 						S0 <= 0;
-						CR4 <= 1;
+						CR4 <= 0;
 						CR3 <= 0;
-						CR2 <= 1;
+						CR2 <= 0;
 						CR1 <= 0;
-						CR0 <= 1;
+						CR0 <= 0;
 					end
 				5'b10111:
 					begin
@@ -1053,7 +1053,7 @@ module microstore(output reg MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRl
 						MOV <= 1;
 						RW <= 0;
 						MARld <= 0;
-						MDRld <= 1;
+						MDRld <= 0;
 						IRld <= 0;
 						PCld <= 0;
 						nPCld <= 0;

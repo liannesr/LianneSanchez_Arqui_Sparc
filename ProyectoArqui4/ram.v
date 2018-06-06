@@ -133,7 +133,7 @@ module ram(output reg [31:0] dataOut, output reg MOC, input RW, MOV, sign, enabl
 											2'b01: {Mem[in_address],Mem[in_address+1]} <= dataIn[15:0];
 											2'b10: {Mem[in_address],Mem[in_address+1],Mem[in_address+2],Mem[in_address+3]} <= dataIn;
 										endcase // dataType
-										$display("Mem[%d] %d",in_address, dataIn[7:0]);
+										$display("\n Mem[%d] %d \n",in_address, dataIn[7:0]);
 										//$display("Mem[%d] %d",in_address+1, Mem[in_address+1]);
 										//$display("Mem[%d] %d",in_address+2, Mem[in_address+2]);
 										//$display("Mem[%d] %d",in_address+3, Mem[in_address+3]);

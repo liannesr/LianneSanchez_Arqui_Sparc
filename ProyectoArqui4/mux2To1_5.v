@@ -7,6 +7,7 @@ module mux2To1_5(output reg [4:0] outMux, input [4:0] I_0, input [4:0] I_1, inpu
 	
 	always @(I_0, I_1, select)
 		begin
+			#1;
 			case(select)
 				1'b0:	outMux <= I_0; 
 				1'b1:	outMux <= I_1;

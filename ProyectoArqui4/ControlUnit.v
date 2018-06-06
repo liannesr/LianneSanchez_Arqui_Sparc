@@ -63,7 +63,7 @@ end
 
 always @ (mux4to1_5_output) begin
 	//$display("RW_inside: %b",RW);
-	//$monitor("Mux: %d,adder_Output:%d, Incrementer:%d, State:%d ",mux4to1_5_output, adder_output, incrementRegister_output,state_out );
+	$monitor("Mux: %d,adder_Output:%d, Incrementer:%d, State:%d ",mux4to1_5_output, adder_output, incrementRegister_output,state_out );
 	//$display("%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n%b\n",
 	//MOV, RW, MARld, MDRld, IRld, PCld, nPCld, RFld, FRld, MA, MB0, MB1, MC, MD0, MD1, ME, MF, MG,OP0, 
 	//			OP1, OP2, OP3, OP4, OP5,Cin, N2, N1, N0, Inv, S1, S0, CR4, CR3, CR2, CR1, CR0); 
